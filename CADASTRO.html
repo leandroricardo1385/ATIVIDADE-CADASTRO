@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Pessoas</title>
+  <style>
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Cadastro de Pessoas</h2>
+
+  <form id="cadastroForm">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" required>
+
+    <label for="idade">Idade:</label>
+    <input type="number" id="idade" required>
+
+    <label for="salario">Salário:</label>
+    <input type="number" id="salario" required>
+
+    <label for="possuiDiploma">Possui Diploma:</label>
+    <input type="checkbox" id="possuiDiploma">
+
+    <button type="button" onclick="cadastrarPessoa()">Cadastrar</button>
+  </form>
+
+  <h2></h2>
+  <ul id="pessoasCadastradas"></ul>
+
+  <script>
+    function cadastrarPessoa() {
+      var nome = document.getElementById('nome').value;
+      var idade = document.getElementById('idade').value;
+      var salario = document.getElementById('salario').value;
+      var possuiDiploma = document.getElementById('possuiDiploma').checked;
+
+      if (nome && idade && salario) {
+        var pessoa = {
+          nome: nome,
+          idade: idade,
+          salario: salario,
+          possuiDiploma: possuiDiploma
+        };
+
+        adicionarPessoaNaLista(pessoa);
+        limparFormulario();
+      } else {
+        alert('Por favor, preencha todos os campos obrigatórios.');
+      }
+    }
+
+    function adicionarPessoaNaLista(pessoa) {
+      var listaPessoas = document.getElementById('pessoasCadastradas');
+      var novoItem = document.createElement('li');
+      novoItem.textContent = `Nome: ${pessoa.nome}, Idade: ${pessoa.idade}, Salário: ${pessoa.salario}, Possui Diploma: ${pessoa.possuiDiploma ? 'Sim' : 'Não'}`;
+      listaPessoas.appendChild(novoItem);
+    }
+
+    function limparFormulario() {
+      document.getElementById('nome').value = '';
+      document.getElementById('idade').value = '';
+      document.getElementById('salario').value = '';
+      document.getElementById('possuiDiploma').checked = false;
+    }
+  </script>
+
+</body>
+</html>
